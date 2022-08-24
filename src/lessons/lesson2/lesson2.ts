@@ -24,6 +24,14 @@ console.log('lesson 2');
 // Task 01
 // Реализовать функцию sum которая суммирует 2 числа следующим образом sum(3)(6) === 9
 
+// function sum(a: number) {
+//     return (b: number) => {
+//         return a + b
+//     }
+// }
+// console.log(sum(3)(6))
+
+
 // Task 02
 // Реализовать функцию makeCounter которая работает следующим образом:
 // const counter = makeCounter();
@@ -33,13 +41,53 @@ console.log('lesson 2');
 // counter2(); // 1
 // counter(); // 3
 
+// function makeCounter () {
+//     let count = 0
+//     return () => {
+//         return ++count
+//     }
+// }
+// const counter = makeCounter()
+// console.log(counter())
+// console.log(counter())
+// const counter2 = makeCounter()
+// console.log(counter2())
+// console.log(counter())
+
 // Task 03
+
 // Переписать функцию из Task 02 так, что бы она принимала число в качестве аргумента и это число было стартовым значением счетчика
 // и возвращала следующий объект методов:
 // increase: +1
 // decrease: -1
 // reset: установить счетчик в 0;
 // set: установить счетчик в заданное значение;
+
+// function makeCounter (num: number) {
+//     let count = num
+//     return () => {
+//         return ({
+//             increase: () => {
+//                 return ++count
+//             },
+//             decrease: () => {
+//                 return --count} ,
+//             reset: () => {
+//                 return count = 0
+//             },
+//             set: () => {
+//                 return count
+//             }
+//         })
+//     }
+// }
+// const counter = makeCounter(5)
+// console.log(counter().increase())
+// console.log(counter().decrease())
+// const counter2 = makeCounter(5)
+// console.log(counter2())
+// console.log(counter().set())
+// console.log(counter().reset())
 
 // Task 04*
 // Реализовать функцию superSum которая принимает число в качестве аргумента, которое указывает на количество слагаемых
@@ -59,5 +107,26 @@ console.log('lesson 2');
 // Task 06
 // написать функцию, которая повторяет функционал метода flat массива на всю глубину.
 
+// const flatRec = (num, arr) => {
+//     console.log(arr)
+//     let arrNew = []
+//     if (num === 1) {
+//         return arr
+//     } else {
+//         for (let i = 0; i < arr.length; i++) {
+//             if (Array.isArray(arr[i])) {
+//                 const arrTemporary = []
+//                 for (let j = 0; j < arr[i].length; j++) {
+//                     arrTemporary.push(arr[i][j])
+//                 }
+//                 let ar2 = flatRec(num - 1, arrTemporary)
+//                 arrNew = arrNew.concat(ar2)
+//             } else arrNew.push(arr[i])
+//         }
+//     }
+//     return arrNew
+// }
+// console.log(flatRec(4, [1, 2, 3, [4, 5, [6,7,[8,9]]]]))
 // just a plug
-export default () => {};
+export default () => {
+};
