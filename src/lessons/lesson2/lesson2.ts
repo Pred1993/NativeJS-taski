@@ -65,29 +65,25 @@ console.log('lesson 2');
 
 // function makeCounter (num: number) {
 //     let count = num
-//     return () => {
-//         return ({
-//             increase: () => {
-//                 return ++count
-//             },
-//             decrease: () => {
-//                 return --count} ,
-//             reset: () => {
-//                 return count = 0
-//             },
-//             set: () => {
-//                 return count
-//             }
-//         })
+//     return {
+//         increase: () => {
+//             return ++count
+//         },
+//         decrease: () => {
+//             return --count} ,
+//         reset: () => {
+//             return count = 0
+//         },
+//         set: () => {
+//             return num
+//         }
 //     }
 // }
 // const counter = makeCounter(5)
-// console.log(counter().increase())
-// console.log(counter().decrease())
-// const counter2 = makeCounter(5)
-// console.log(counter2())
-// console.log(counter().set())
-// console.log(counter().reset())
+// console.log(counter.increase())
+// console.log(counter.decrease())
+// console.log(counter.set())
+// console.log(counter.reset())
 
 // Task 04*
 // Реализовать функцию superSum которая принимает число в качестве аргумента, которое указывает на количество слагаемых
@@ -98,6 +94,37 @@ console.log('lesson 2');
 // 4) superSum(3)(2,5,3) //10
 // 5) superSum(3)(2,5)(3) //10
 // 6) superSum(3)(2,5)(3,9) //10
+
+function superSum (num: number) {
+   if (num === 0) return 0
+   if(num === 1) return (n: number) => n
+
+    let argument: Array<number> = []
+    function helper(...args: Array<number>) {
+       argument = [...argument, ...args]
+        if (argument.length >= num) {
+            argument.length = num
+            return argument.reduce((acc, number) => acc + number)
+        } else {
+            return helper
+        }
+    }
+   return helper
+}
+
+console.log(superSum(0))
+// @ts-ignore
+console.log(superSum(1)(25))
+// @ts-ignore
+console.log(superSum(3)(2)(5)(3))
+// @ts-ignore
+console.log(superSum(3)(2)(5,3))
+// @ts-ignore
+console.log(superSum(3)(2,5,3))
+// @ts-ignore
+console.log(superSum(3)(2,5)(3))
+//@ts-ignore
+//console.log(superSum(3)(2,5)(3,9))
 
 // P.S. типизируйте только аргументы, а при вызове функции используйте @ts-ignore
 
