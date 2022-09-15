@@ -117,6 +117,8 @@ type OneType = {
     name: string
 }
 let One: OneType = {name: 'One'};
+
+// type TwoType = typeof Two
 let Two = {
     name: 'Two',
     sayHello: function (age: number) {
@@ -164,19 +166,32 @@ console.log(helperObj.greeting.bind(helperObj)(35))
 function result(one: OneType, helperObj: HelperObjType) {
     return function (string: string) {
         //@ts-ignore
-        helperObj.changeName.bind(one,string)()
+        helperObj.changeName.bind(one, string)()// helperObj.changeName.call(one,string) - переписать чтобы на call
     }
 }
+
 result(One, helperObj)('adawd')
 console.log(One)
 
 
-
 // 3) Одной строкой установить с помощью helperObj объекту Two поле age в значение 30
-
-
+//@ts-ignore
+helperObj.setAge.bind(Two)(30)// helperObj.setAge.call(Two, 30) - переписать чтобы на call
+console.log(Two)
 // 4) Создать метод hi у объекта One, который всегда вызывает метод greeting объекта helperObj от имени Two
-
+//@ts-ignore
+One.hi = helperObj.greeting.bind(Two)
+console.log(One)
+//@ts-ignore
+console.log(One.hi(23))
+// А сейчас на метод call перепишу
+//@ts-ignore
+One.hi = function () {
+    helperObj.greeting.call(Two, 23)
+}
+console.log(One)
+//@ts-ignore
+console.log(One.hi())
 // Реализовать задачи 2-4 из Bind с помощью Call
 
 // 1) Дана функция sumTwoNumbers, реализовать функцию bindNumber которая принимает функцию sumTwoNumbers и число, и
@@ -185,6 +200,12 @@ function sumTwoNumbers(a: number, b: number): number {
     return a + b
 };
 
+function bindNumber(f: Function, num: number) {
+    return f.bind(null, num)
+}
+
+let bindTen = bindNumber(sumTwoNumbers, 10)
+console.log(bindTen(5))
 // just a plug
 export default () => {
 };
