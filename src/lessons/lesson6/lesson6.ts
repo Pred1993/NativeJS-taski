@@ -107,23 +107,86 @@ console.log('Lesson 6');
 // let obj2 = new Test2('Eugen', 25)
 // obj2.someMethod()// вызовет наследуемый sayBla(), так ака он protected, при том что в наследуемом классе мы не сможем обратиться к приватным методам и свойствам из класса Test
 // -------------------------------Static---------------------------------
-class Test {
-    static param: string = 'Yo'// не будет являться частью экземпляра класса
-    someM() {
-        this// напомню, что this в обычном методе указывает на контекст будущего созданного от этого класса инстанса
-    }
-    static testMethod() {
-        console.log(this.param) // this в статическом методе указывает на сам класс Test
-    }
-}
-let obj = new Test()
-console.log(obj)
+// class Test {
+//     static param: string = 'Yo'// не будет являться частью экземпляра класса
+//     someM() {
+//         this// напомню, что this в обычном методе указывает на контекст будущего созданного от этого класса инстанса
+//     }
+//     static testMethod() {
+//         console.log(this.param) // this в статическом методе указывает на сам класс Test
+//     }
+// }
+// let obj = new Test()
+// console.log(obj)
 
 // Task 01
 // Создайте структуру с именем student, содержащую поля: имя и фамилия, номер группы, успеваемость (массив из пяти элементов).
 // Создать массив из десяти элементов такого типа, упорядочить записи по возрастанию среднего балла.
 // Добавить возможность вывода фамилий и номеров групп студентов, имеющих оценки, равные только 4 или 5.
 
+interface IStudent {
+    name: string
+    surname: string
+    groupNumber: number
+    progress: number[]
+    averageMark: number
+}
+
+class Student implements IStudent {
+    averageMark: number
+
+    constructor(public name: string, public surname: string, public groupNumber: number, public progress: number[]) {
+        this.name = name
+        this.surname = surname
+        this.groupNumber = groupNumber
+        this.progress = progress
+        this.averageMark = this.progress.reduce((acc, el) => acc + el) / this.progress.length
+    }
+
+    private static sortStudent(s1: IStudent, s2: IStudent) {
+        if (s1.averageMark > s2.averageMark) {
+            return 1
+        } else if (s1.averageMark < s2.averageMark) {
+            return -1
+        } else {
+            return 0
+        }
+    }
+    static sort(arr: Array<IStudent>){
+        const temp = [...arr]
+        return temp.sort(this.sortStudent)
+    }
+    private static isAllMarksEqual(marks: number[], mark: number){
+        return marks.every(mk => mk === mark)
+    }
+    private static filterStudent(arr: Array<IStudent>) {
+        const result: Array<IStudent> = []
+        arr.forEach(s => {
+            if(this.isAllMarksEqual(s.progress, 4) || this.isAllMarksEqual(s.progress, 5)) {
+                result.push(s)
+            }
+
+        })
+        return result
+    }
+    static printGoodStudents(arr: Array<IStudent>){
+        this.filterStudent(arr).forEach(s => {
+            console.log(`Student - ${s.surname}, Group - ${s.groupNumber}`)
+        })
+    }
+}
+
+
+let s1 = new Student('Artem', 'Ivchenko', 1, [4, 5, 3, 4, 5])
+let s2 = new Student('Oleg', 'Levkovich', 2, [4, 4, 4, 4, 4])
+let s3 = new Student('Denis', 'Ivanov', 3, [5, 5, 5, 5, 5])
+let s4 = new Student('Vlad', 'Rudak', 4, [4, 5, 3, 4, 5])
+let s5 = new Student('Dima', 'Shunto', 5, [4, 5, 3, 4, 5])
+
+let student = [s1, s2, s3, s4, s5]
+
+console.log(Student.sort(student))
+console.log(Student.printGoodStudents(student))
 // Task 02
 // Создать класс с двумя переменными. Добавить конструктор с входными параметрами и инициализирующий члены класса по умолчанию.
 // Можно ли создать метод на экземпляре класса который будет удалять сам экземпляр класса?
