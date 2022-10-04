@@ -166,7 +166,8 @@ console.log(helperObj.greeting.bind(helperObj)(35))
 function result(one: OneType, helperObj: HelperObjType) {
     return function (string: string) {
         //@ts-ignore
-        helperObj.changeName.bind(one, string)()// helperObj.changeName.call(one,string) - переписать чтобы на call
+        //helperObj.changeName.bind(one, string)()// helperObj.changeName.call(one,string) - переписать чтобы на call
+       helperObj.changeName.call(one,string)
     }
 }
 

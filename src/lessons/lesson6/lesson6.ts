@@ -7,6 +7,118 @@ console.log('Lesson 6');
 // https://www.youtube.com/watch?v=BASquaxab_w
 // https://www.youtube.com/watch?v=uLY9GXGMXaA
 
+// class Test {
+//     name: string
+//     age: number
+//     city: string = 'Minsk'
+//     constructor(name: string, age: number) {
+//         this.name = name
+//         this.age = age
+//     }
+//     sayHi() {
+//
+//     }
+//     bindFunc = () => {
+//
+//     }
+// }
+// let obj = new Test('Evgen', 33)
+// obj.city = 'Kiev'
+// console.dir(obj)
+// console.dir(Test)
+
+// class Test {
+//     name: string
+//
+//     constructor(name: string) {
+//         this.name = name
+//     }
+//
+//     sayHi() {
+//         console.log('Hello from parent')
+//     }
+//     arrow = () => { // если в дочке создать такую же стрелочную функцию, то она перезапишет родительскую навсегда, так как стрелка помещается в свойства, а не в прототипы
+//
+//     }
+// }
+//
+// class Test2 extends Test {
+//     age: number
+//     constructor(name: string, age: number) {
+//         super(name);
+//         this.age = age
+//     }
+//     sayBye() {
+//
+//     }
+//     // sayHi() { можно так делать, в таком случае переопределит родительский метод
+//     //
+//     // }
+//    sayHi(){
+//         super.sayHi() // позволяет вызвать родительский метод и свой
+//        console.log('Hello from child')
+//    }
+// }
+//
+// let obj = new Test2('Evgen', 33)
+// let obj2 = new Test('Artem')
+// console.dir(obj)
+// console.log(obj.sayHi())
+// console.log(obj.arrow())
+// ---------------------Модификаторы-----------------------
+//public - сделал всё типизацию за нас, пример без него выше
+// class Test {
+//     constructor(public name: string, public age: number) {
+//     }
+// }
+//
+// let obj = new Test('Evgen', 33)
+// console.log(obj)
+
+//privat
+// class Test {
+//     constructor(private name: string, public age: number) {
+//     }
+//     sayName() {
+//         console.log(this.name)
+//     }
+//     private sayYo () {
+//         console.log('Yo-yo-yo')
+//     }
+//     protected sayBla () {
+//         console.log('Bla-bla-bla')
+//     }
+// }
+// class Test2 extends Test {
+//     constructor(name: string, age: number) {
+//         super(name, age);
+//     }
+//     someMethod() {
+//         this.sayBla()
+//     }
+// }
+//
+// let obj = new Test('Eugen', 25)
+//     //obj.name // Property 'name' is private and only accessible within class 'Test'.
+//
+// console.log(obj.sayName()) // через метод обратиться можно
+// // Приватные свойства не наследуются, если мы хотим отнаследоваться(extends), то вместо privat используем protected
+//     //obj.sayBla//Property 'sayBla' is protected and only accessible within class 'Test' and its subclasses(в рамках класса protected тоже приватным считается
+// let obj2 = new Test2('Eugen', 25)
+// obj2.someMethod()// вызовет наследуемый sayBla(), так ака он protected, при том что в наследуемом классе мы не сможем обратиться к приватным методам и свойствам из класса Test
+// -------------------------------Static---------------------------------
+class Test {
+    static param: string = 'Yo'// не будет являться частью экземпляра класса
+    someM() {
+        this// напомню, что this в обычном методе указывает на контекст будущего созданного от этого класса инстанса
+    }
+    static testMethod() {
+        console.log(this.param) // this в статическом методе указывает на сам класс Test
+    }
+}
+let obj = new Test()
+console.log(obj)
+
 // Task 01
 // Создайте структуру с именем student, содержащую поля: имя и фамилия, номер группы, успеваемость (массив из пяти элементов).
 // Создать массив из десяти элементов такого типа, упорядочить записи по возрастанию среднего балла.

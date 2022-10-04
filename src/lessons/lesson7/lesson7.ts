@@ -1,4 +1,4 @@
-console.log('Lesson 7');
+// console.log('Lesson 7');
 
 // __Proto__
 // https://learn.javascript.ru/prototype-inheritance
@@ -13,6 +13,31 @@ console.log('Lesson 7');
 // https://www.youtube.com/watch?v=aQkgUUmUJy4&t=21s
 // https://www.youtube.com/watch?v=b55hiUlhAzI
 
+class Test {
+    constructor(public name: string) {
+    }
+    getName() {
+
+    }
+}
+
+class SuperTest extends Test {
+    constructor(name: string) {
+        super(name);
+    }
+    getName() {
+
+    }
+}
+let obj = new SuperTest("Anton")
+
+//@ts-ignore
+obj.__proto__.getName = 50
+//@ts-ignore
+obj.__proto__.__proto__.getName = 50
+console.dir(obj)
+console.dir(SuperTest)
+console.dir(Test)
 
 //Task 01
 // Реализовать класс Animal который принимает name(по умолчанию 'Animal') в качестве параметра, у которого будет 3
@@ -21,6 +46,24 @@ console.log('Lesson 7');
 // проверить, что методы работают
 
 
+// class Animal {
+//     constructor(public name: string) {
+//     }
+//     walk() {
+//         return `${this.name} + walking`
+//     }
+//     eat() {
+//         `${this.name} walking`
+//     }
+//     sleep() {
+//         `${this.name} walking`
+//     }
+// }
+// const obj = new Animal('Animal')
+// //@ts-ignore
+// obj.__proto__.fullHouse = function () {}
+// console.dir(obj)
+// console.dir(Animal)
 //Task 02
 // Реализовать класс Monkey на базе класса Animal,  конструктор принимает name(по умолчанию 'Monkey') в качестве
 // параметра, реализовать методы roar и climb аналогично классу Animal
