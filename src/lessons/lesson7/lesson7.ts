@@ -13,31 +13,32 @@
 // https://www.youtube.com/watch?v=aQkgUUmUJy4&t=21s
 // https://www.youtube.com/watch?v=b55hiUlhAzI
 
-class Test {
-    constructor(public name: string) {
-    }
-    getName() {
+// class Test {
+//     constructor(public name: string) {
+//     }
+//     getName() {
+//
+//     }
+// }
+//
+// class SuperTest extends Test {
+//     constructor(name: string) {
+//         super(name);
+//     }
+//     getName() {
+//
+//     }
+// }
+// let obj = new SuperTest("Anton")
+//
+// //@ts-ignore
+// obj.__proto__.getName = 50
+// //@ts-ignore
+// obj.__proto__.__proto__.getName = 50
+// console.dir(obj)
+// console.dir(SuperTest)
+// console.dir(Test)
 
-    }
-}
-
-class SuperTest extends Test {
-    constructor(name: string) {
-        super(name);
-    }
-    getName() {
-
-    }
-}
-let obj = new SuperTest("Anton")
-
-//@ts-ignore
-obj.__proto__.getName = 50
-//@ts-ignore
-obj.__proto__.__proto__.getName = 50
-console.dir(obj)
-console.dir(SuperTest)
-console.dir(Test)
 
 //Task 01
 // Реализовать класс Animal который принимает name(по умолчанию 'Animal') в качестве параметра, у которого будет 3
@@ -64,6 +65,8 @@ console.dir(Test)
 // obj.__proto__.fullHouse = function () {}
 // console.dir(obj)
 // console.dir(Animal)
+
+
 //Task 02
 // Реализовать класс Monkey на базе класса Animal,  конструктор принимает name(по умолчанию 'Monkey') в качестве
 // параметра, реализовать методы roar и climb аналогично классу Animal
@@ -83,6 +86,14 @@ console.dir(Test)
 // Task 05
 // Используя метод Apply реализовать свой собственный метод bind
 
+
+//Task 06
+// Задача на дескрипторы. Как нужно переписать объект, чтобы код заработал
+
+// let obj = {a: 1}
+// if(obj.a === 1 && obj.a === 2 && obj.a === 3) {
+//     console.log('Bingo')
+// }
 
 // just a plug
 export default () => {};
