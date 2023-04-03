@@ -40,7 +40,8 @@ Function.prototype.customBind = function (zczxczxc, ...args) {
 
 let obj = {name: 'Hanna'}
 let obj2 = {
-    name: 'Yo', sayName: function (x) {
+    name: 'Yo',
+    sayName: function (x) {
         console.log(this.name + "" + x)
     }
 }
